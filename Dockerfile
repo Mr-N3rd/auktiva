@@ -16,8 +16,8 @@ RUN apk add --no-cache libc6-compat
 COPY package.json package-lock.json ./
 COPY prisma ./prisma/
 
-# Install dependencies
-RUN npm ci
+# Install dependencies (skip "prepare"/husky script; no .git in build context)
+RUN npm ci --ignore-scripts
 
 # -----------------------------------------------------------------------------
 # Stage 2: Builder

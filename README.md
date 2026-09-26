@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/thomsa/auktiva)](https://github.com/thomsa/auktiva/stargazers)
 
+
 A free, open-source auction platform for hosting private and public auctions. Perfect for charity events, fundraisers, schools, churches, company events, and community organizations.
 
 **No payment processing** - all transactions are settled offline between participants.
