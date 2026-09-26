@@ -14,14 +14,14 @@ services:
     container_name: auktiva
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "${AUKTIVA_HOST_PORT:-3001}:3000"
     environment:
       - NODE_ENV=production
       # Database (SQLite - stored in volume)
       - DATABASE_URL=file:./data/auktiva.db
       # Authentication (REQUIRED - generate with: openssl rand -base64 32)
       - AUTH_SECRET=${AUTH_SECRET}
-      - AUTH_URL=${AUTH_URL:-http://localhost:3000}
+      - AUTH_URL=${AUTH_URL:-https://auctions.n3rdvana.com}
       # Storage
       - STORAGE_PROVIDER=${STORAGE_PROVIDER:-local}
       # Optional: S3 storage
@@ -35,11 +35,12 @@ services:
       - BREVO_API_KEY=${BREVO_API_KEY:-}
       - SMTP_HOST=${SMTP_HOST:-}
       - SMTP_PORT=${SMTP_PORT:-}
+      - SMTP_SECURE=${SMTP_SECURE:-false}
       - SMTP_USER=${SMTP_USER:-}
       - SMTP_PASSWORD=${SMTP_PASSWORD:-}
       - MAIL_FROM=${MAIL_FROM:-noreply@auktiva.org}
       - MAIL_FROM_NAME=${MAIL_FROM_NAME:-Auktiva}
-      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-https://auctions.n3rdvana.com}
       - CRON_SECRET=${CRON_SECRET:-}
       # Optional: OAuth
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID:-}
@@ -90,7 +91,7 @@ services:
     container_name: soketi
     restart: unless-stopped
     ports:
-      - "6001:6001"
+      - "${SOKETI_HOST_PORT:-6002}:6001"
     environment:
       - SOKETI_DEBUG=${SOKETI_DEBUG:-false}
       - SOKETI_DEFAULT_APP_ID=${SOKETI_APP_ID:-auktiva}
